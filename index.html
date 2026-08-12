@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bhaskar Stationery Shop</title>
+<meta name="description" content="Bhaskar Stationery Shop - stationery products, prices and availability in Hindi and English.">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="style.css?v=3">
+<link rel="manifest" href="manifest.webmanifest"></head>
+<body>
+<header class="nav">
+<a class="brand" href="#home">📚 <span data-hi="भास्कर स्टेशनरी शॉप" data-en="Bhaskar Stationery Shop">भास्कर स्टेशनरी शॉप</span></a>
+<nav><a href="#products" data-hi="Products" data-en="Products">Products</a><a href="#status" data-hi="उपलब्धता" data-en="Availability">उपलब्धता</a><a href="#about" data-hi="हमारे बारे में" data-en="About">हमारे बारे में</a></nav>
+<div class="actions"><button class="lang" id="langBtn" onclick="toggleLang()">English</button><button class="adminBtn" onclick="openAdmin()">🔐 Admin</button></div>
+</header>
+
+<section class="hero" id="home">
+<div><span class="tag" data-hi="आपकी स्थानीय स्टेशनरी दुकान" data-en="YOUR LOCAL STATIONERY STORE">आपकी स्थानीय स्टेशनरी दुकान</span>
+<h1 data-hi="पढ़ाई की हर ज़रूरत,<br><em>एक ही जगह।</em>" data-en="Everything for your studies,<br><em>in one place.</em>">पढ़ाई की हर ज़रूरत,<br><em>एक ही जगह।</em></h1>
+<p data-hi="Pen, pencil, notebooks, books और बहुत कुछ। दुकान पर आने से पहले product और availability देखिए।" data-en="Pens, pencils, notebooks, books and more. Check products, prices and availability before visiting the shop.">Pen, pencil, notebooks, books और बहुत कुछ। दुकान पर आने से पहले product और availability देखिए।</p>
+<a class="cta" href="#products" data-hi="Products देखें ↓" data-en="View Products ↓">Products देखें ↓</a></div>
+<div class="heroCard"><div class="book">📖</div><b data-hi="आज क्या चाहिए?" data-en="What do you need today?">आज क्या चाहिए?</b><span data-hi="पहले stock status check करें" data-en="Check stock status first">पहले stock status check करें</span></div>
+</section>
+
+<section class="toolbar" id="products">
+<div><h2 data-hi="हमारे Products" data-en="Our Products">हमारे Products</h2><p id="countText"></p></div>
+<div class="search"><input id="search" oninput="render()" placeholder="🔎 Product खोजें / Search products"><select id="category" onchange="render()"><option value="">सभी / All categories</option><option>Pen</option><option>Pencil</option><option>Notebook</option><option>Book</option><option>School Supplies</option></select></div>
+</section>
+<main id="productGrid" class="grid"></main>
+
+<section id="status" class="info"><h2 data-hi="📦 उपलब्धता कैसे समझें?" data-en="📦 How availability works">📦 उपलब्धता कैसे समझें?</h2>
+<div class="statusCards"><div>🟢 <b data-hi="In Stock" data-en="In Stock">In Stock</b><p data-hi="अभी दुकान में उपलब्ध है।" data-en="Available in the shop now.">अभी दुकान में उपलब्ध है।</p></div>
+<div>🔴 <b data-hi="Out of Stock" data-en="Out of Stock">Out of Stock</b><p data-hi="अभी उपलब्ध नहीं है।" data-en="Currently unavailable.">अभी उपलब्ध नहीं है।</p></div>
+<div>🟡 <b data-hi="Coming Soon" data-en="Coming Soon">Coming Soon</b><p data-hi="जल्द आने वाला है।" data-en="Expected soon.">जल्द आने वाला है।</p></div></div></section>
+
+<section id="about" class="about"><div><span class="tag" data-hi="हमारे बारे में" data-en="ABOUT">हमारे बारे में</span><h2 data-hi="Bhaskar Stationery Shop" data-en="Bhaskar Stationery Shop">Bhaskar Stationery Shop</h2><p data-hi="दुकान पर आने से पहले products, prices और availability देखें।" data-en="Check products, prices and availability before visiting the shop.">दुकान पर आने से पहले products, prices और availability देखें।</p></div><div class="contact"><b data-hi="📍 Store information" data-en="📍 Store information">📍 Store information</b><p data-hi="अपना पता और contact details Admin Dashboard में सेट करें।" data-en="Set your address and contact details in the Admin Dashboard.">अपना पता और contact details Admin Dashboard में सेट करें।</p></div></section>
+<footer>© 2026 Bhaskar Stationery Shop · <span data-hi="Availability दिन में बदल सकती है।" data-en="Availability may change during the day.">Availability दिन में बदल सकती है।</span></footer>
+
+<div id="adminModal" class="modal hidden"><div class="adminPanel"><button class="close" onclick="closeAdmin()">×</button>
+<div id="loginView"><span class="tag">OWNER AREA</span><h2 data-hi="Admin Dashboard" data-en="Admin Dashboard">Admin Dashboard</h2><p class="muted" data-hi="यह demo interface है। असली website में server-side password लगाएँ।" data-en="This is a demo interface. Use server-side password authentication in production.">यह demo interface है। असली website में server-side password लगाएँ।</p><input id="adminPin" type="password" placeholder="Demo PIN"><button class="cta full" onclick="adminLogin()" data-hi="Login" data-en="Login">Login</button><p id="loginMsg"></p></div>
+<div id="dashboard" class="hidden"><div class="dashHead"><div><span class="tag">DASHBOARD</span><h2 data-hi="Products Manage करें" data-en="Manage Products">Products Manage करें</h2></div><button class="secondary" onclick="logout()">Logout</button></div>
+<div class="stats"><div><b id="sTotal">0</b><span>Total</span></div><div><b id="sStock">0</b><span>In Stock</span></div><div><b id="sOut">0</b><span>Out</span></div><div><b id="sSoon">0</b><span>Coming</span></div></div>
+<form id="productForm" onsubmit="saveProduct(event)"><input type="hidden" id="editId"><input id="pName" required placeholder="Product name"><select id="pCategory"><option>Pen</option><option>Pencil</option><option>Notebook</option><option>Book</option><option>School Supplies</option></select><input id="pPrice" required type="number" min="0" step="0.01" placeholder="Price ₹"><select id="pStatus"><option value="stock">In Stock</option><option value="out">Out of Stock</option><option value="soon">Coming Soon</option></select><input id="pImage" placeholder="Image URL (optional)"><textarea id="pDetails" placeholder="Product details"></textarea><button class="cta full" type="submit" data-hi="Product Save करें" data-en="Save Product">Product Save करें</button></form>
+<h3 data-hi="Product list" data-en="Product list">Product list</h3><div id="adminList"></div></div></div></div>
+
+<script>
+const KEY='bhaskar_stationery_final_v2';
+const defaults=[
+{id:1,name:'Blue Ball Pen',category:'Pen',price:10,status:'stock',image:'',details:'Smooth blue ink ball pen.'},
+{id:2,name:'HB Pencil',category:'Pencil',price:5,status:'stock',image:'',details:'HB graphite pencil.'},
+{id:3,name:'Class Notebook 200 Pages',category:'Notebook',price:55,status:'stock',image:'',details:'Ruled 200-page notebook.'},
+{id:4,name:'Class 9 Science Book',category:'Book',price:180,status:'soon',image:'',details:'Study/reference book.'},
+{id:5,name:'Geometry Box',category:'School Supplies',price:95,status:'out',image:'',details:'Geometry instruments box.'},
+{id:6,name:'Black Marker',category:'Pen',price:25,status:'stock',image:'',details:'Permanent black marker.'}
+];
+let lang=localStorage.getItem('bhaskar_lang')||'hi';
+function get(){let x=localStorage.getItem(KEY);if(!x){localStorage.setItem(KEY,JSON.stringify(defaults));return defaults}return JSON.parse(x)}
+function set(x){localStorage.setItem(KEY,JSON.stringify(x))}
+function statusText(s){return lang==='hi'?(s==='stock'?'उपलब्ध':s==='out'?'स्टॉक में नहीं':'जल्द उपलब्ध'):s==='stock'?'In Stock':s==='out'?'Out of Stock':'Coming Soon'}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]) )}
+function icon(c){return c==='Pen'?'🖊️':c==='Pencil'?'✏️':c==='Notebook'?'📒':c==='Book'?'📚':'📐'}
+function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-hi]').forEach(e=>e.innerHTML=e.dataset[lang]);langBtn.textContent=lang==='hi'?'English':'हिंदी';render()}
+function toggleLang(){lang=lang==='hi'?'en':'hi';localStorage.setItem('bhaskar_lang',lang);applyLang()}
+function render(){let q=search.value.toLowerCase(),c=category.value,ps=get().filter(p=>(!q||(`${p.name} ${p.details} ${p.category}`).toLowerCase().includes(q))&&(!c||p.category===c));countText.textContent=lang==='hi'?`${ps.length} products दिख रहे हैं`:`${ps.length} products shown`;productGrid.innerHTML=ps.map(p=>`<article class="product"><div class="pimg">${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}">`:icon(p.category)}</div><div class="pbody"><span class="cat">${esc(p.category)}</span><h3>${esc(p.name)}</h3><p>${esc(p.details)}</p><div class="price">₹${Number(p.price).toLocaleString('en-IN')}</div><span class="status ${p.status}">${statusText(p.status)}</span></div></article>`).join('')||`<div class="empty">${lang==='hi'?'Product नहीं मिला।':'No product found.'}</div>`}
+function openAdmin(){adminModal.classList.remove('hidden')}function closeAdmin(){adminModal.classList.add('hidden')}
+function adminLogin(){if(adminPin.value==='1234'){loginView.classList.add('hidden');dashboard.classList.remove('hidden');adminRender()}else loginMsg.textContent=lang==='hi'?'गलत demo PIN.':'Wrong demo PIN.'}
+function logout(){dashboard.classList.add('hidden');loginView.classList.remove('hidden');adminPin.value=''}
+function adminRender(){let ps=get();sTotal.textContent=ps.length;sStock.textContent=ps.filter(p=>p.status==='stock').length;sOut.textContent=ps.filter(p=>p.status==='out').length;sSoon.textContent=ps.filter(p=>p.status==='soon').length;adminList.innerHTML=ps.map(p=>`<div class="adminRow"><div><b>${esc(p.name)}</b><small>₹${p.price} · ${statusText(p.status)}</small></div><div><button onclick="editProduct(${p.id})">${lang==='hi'?'Edit':'Edit'}</button><button class="danger" onclick="deleteProduct(${p.id})">${lang==='hi'?'Delete':'Delete'}</button></div></div>`).join('')}
+function saveProduct(e){e.preventDefault();let ps=get(),id=Number(editId.value)||Date.now(),p={id,name:pName.value,category:pCategory.value,price:Number(pPrice.value),status:pStatus.value,image:pImage.value,details:pDetails.value};let i=ps.findIndex(x=>x.id===id);if(i<0)ps.push(p);else ps[i]=p;set(ps);e.target.reset();editId.value='';adminRender();render()}
+function editProduct(id){let p=get().find(x=>x.id===id);editId.value=p.id;pName.value=p.name;pCategory.value=p.category;pPrice.value=p.price;pStatus.value=p.status;pImage.value=p.image;pDetails.value=p.details}
+function deleteProduct(id){if(confirm(lang==='hi'?'इस product को हटाएँ?':'Delete this product?')){set(get().filter(p=>p.id!==id));adminRender();render()}}
+applyLang();
+</script></body></html>
